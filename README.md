@@ -13,6 +13,20 @@ This component implements the `setInterval` logic to render a clock and prevent 
 - You can render it whatever you like
 - TypeScript support
 
+## Install
+
+### npm
+
+```
+npm install react-clock-interval
+```
+
+### yarn
+
+```
+yarn add react-clock-interval
+```
+
 ## API
 
 | Prop            | Type     | Required | Description                                                                                                              |
