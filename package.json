@@ -1,6 +1,6 @@
 {
   "name": "react-clock-interval",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Almost accurate clock component for react",
   "main": "lib/index.js",
   "types": "lib/index.d.js",
