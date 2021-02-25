@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface ClockProps {
   initialDateTime?: Date;
   children: (dateTime: Date) => React.ReactNode;
+  forceUpdateInitialDateTime?: boolean;
 }
 
 export interface ClockState {
@@ -31,6 +32,17 @@ class Clock extends React.Component<ClockProps, ClockState> {
 
   componentWillUnmount() {
     clearTimeout(this.timeoutId);
+  }
+
+  componentDidUpdate(prevProps: ClockProps) {
+    if (
+      this.props.forceUpdateInitialDateTime &&
+      prevProps.initialDateTime != this.props.initialDateTime
+    ) {
+      this.delta = this.props.initialDateTime
+        ? Date.now() - this.props.initialDateTime.getTime()
+        : 0;
+    }
   }
 
   tick = () => {
