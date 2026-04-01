@@ -3,8 +3,13 @@ import * as React from 'react';
 export interface ClockProps {
   initialDateTime?: Date;
   children: (dateTime: Date) => React.ReactNode;
-  forceUpdateInitialDateTime?: boolean;
 }
+
+const getDateTimeValue = (dateTime?: Date) =>
+  dateTime ? dateTime.getTime() : null;
+
+const calculateDeltaFromProps = ({ initialDateTime }: ClockProps) =>
+  initialDateTime ? Date.now() - initialDateTime.getTime() : 0;
 
 export interface ClockState {
   dateTime: Date;
@@ -21,9 +26,7 @@ class Clock extends React.Component<ClockProps, ClockState> {
   constructor(props: ClockProps) {
     super(props);
 
-    this.delta = props.initialDateTime
-      ? Date.now() - props.initialDateTime.getTime()
-      : 0;
+    this.delta = calculateDeltaFromProps(props);
   }
 
   componentDidMount() {
@@ -36,12 +39,10 @@ class Clock extends React.Component<ClockProps, ClockState> {
 
   componentDidUpdate(prevProps: ClockProps) {
     if (
-      this.props.forceUpdateInitialDateTime &&
-      prevProps.initialDateTime != this.props.initialDateTime
+      getDateTimeValue(prevProps.initialDateTime) !==
+      getDateTimeValue(this.props.initialDateTime)
     ) {
-      this.delta = this.props.initialDateTime
-        ? Date.now() - this.props.initialDateTime.getTime()
-        : 0;
+      this.delta = calculateDeltaFromProps(this.props);
     }
   }
 
