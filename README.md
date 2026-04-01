@@ -33,7 +33,6 @@ yarn add react-clock-interval
 | --------------- | -------- | :------: | ------------------------------------------------------------------------------------------------------------------------ |
 | children        | function |    ✔     | A render prop that will give you the current date and you can render it whatever you like.                               |
 | initialDateTime | Date     |    ❌    | By default, the clock provides the system date. If you wish to start on some specific date instead, set it on this prop. |
-| forceUpdateInitialDateTime | boolean     |    ❌    | Forces the clock time to update. |
 
 ## Example
 
@@ -43,11 +42,7 @@ import Clock from 'react-clock-interval';
 
 class Example extends React.Component {
   render() {
-    return (
-      <Clock>
-        {dateTime => <div>{dateTime.toString()}</div>}
-      </Clock>
-    );
+    return <Clock>{dateTime => <div>{dateTime.toString()}</div>}</Clock>;
   }
 }
 ```
